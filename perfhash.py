@@ -67,13 +67,13 @@ def computeMiniHashIndices(L,m):
         j = 0
         while True:
             h = miniHash(m,j)
-            slots = []
+            slots = set()
 
             for w in bucket:
                 slot = h(w)
                 if (T[slot] or slot in slots):
                     break
-                slots.append(slot)
+                slots.add(slot)
             else:
                 break
             j += 1
