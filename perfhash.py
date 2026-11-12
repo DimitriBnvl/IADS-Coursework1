@@ -63,38 +63,24 @@ def computeMiniHashIndices(L,m):
     T = [False]*m
     R = [0]*len(L)
 
-    # for each(i, bucket) in the sorted pairs:
-    #     j ← 0
-    #     slots ← [where miniHash(m, j) sends each word w in bucket]
-    #
-    #     while (any slot s in slots has T[s] == True)
-    #         OR(slots
-    #         contains
-    #         a
-    #         duplicate):
-    #         j ← j + 1
-    #         slots ← [where miniHash(m, j) sends each word w in bucket]
-    #
-    #     R[i] ← j
-    #     for each s in slots:
-    #         T[s] <- true
-
     for i, bucket in L:
         j = 0
         slots = [miniHash(m, j)(w) for w in bucket]
 
-        space_taken = all([T[slot] for slot in slots])
-        has_duplicate   = any([T[s] in T for s in slots])
-        while not space_taken or has_duplicate:
+        slots_left    = any(T[slot] for slot in slots)
+        has_duplicate = len(set(slots)) != len(slots)
+        while slots_left or has_duplicate:
             j += 1
-            R[i] = j
+            slots = [miniHash(m, j)(w) for w in bucket]
 
+            slots_left    = any(T[slot] for slot in slots)
+            has_duplicate = len(set(slots)) != len(slots)
+
+        R[i] = j
         for slot in slots:
             T[slot] = True
 
-
     return R
-
 
 # Provided code for putting all this together.
 
