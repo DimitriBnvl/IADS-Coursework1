@@ -9,7 +9,6 @@
 # Provided code:
 
 from enum import Enum
-from mailcap import lookup
 
 # Colour and direction tags
 
@@ -124,15 +123,15 @@ class RedBlackTree():
         if len(self.stack) < 5: return False
 
         current, parent  = self.stack[-1], self.stack[-3]
-        grandparent      = self.stack[-5]
-        uncle = grandparent.getChild(opposite(self.stack[-4]))
+        grand            = self.stack[-5]
+        uncle = grand.getChild(opposite(self.stack[-4]))
 
         if not all(colourOf(n) == Red for n in (current, parent, uncle)):
             return False
 
-        parent.colour      = Black
-        uncle.colour       = Black
-        grandparent.colour = Red
+        parent.colour = Black
+        uncle.colour  = Black
+        grand.colour  = Red
         [self.stack.pop() for _ in range(4)]
         return True
         
@@ -187,7 +186,15 @@ class RedBlackTree():
             parent.colour = Black
             return
 
-        grand = self.stack[-5]
+        grand  = self.stack[-5]
+        elems  = self.toNextBlackLevel(current)
+        newTop = self.balancedTree(elems)
+        if len(self.stack) == 5:
+            self.root = grand
+        else:
+            greatGrand    = self.stack[-7]
+            dirGreatGrant = self.stack[-6]
+            greatGrand.setChild(dirGreatGrant, newTop)
 
 
     def insert(self,key,value):
