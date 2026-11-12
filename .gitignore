@@ -32,6 +32,9 @@ ENV/
 .env
 *.env
 
+# Local test files (not for submission)
+test_*
+
 # Testing / coverage
 .pytest_cache/
 .coverage

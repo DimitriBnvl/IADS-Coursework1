@@ -47,7 +47,8 @@ def buildHashTable(L,r,h):
 
 def buildModHashTable(L,p):
     """Apply buildHashTable to the modHash function for p."""
-
+    h = lambda w: modHash(w,p)
+    return buildHashTable(L, p, h)
 
 # TODO: Task 2. Computing mini-hash indices for a given list L of buckets,
 #       using 0,...,m-1 as hash codes
