@@ -106,6 +106,7 @@ class RedBlackTree():
     def plainInsert(self,key,value):
         """Insert new key-value pair in tree at position given by ordering,
         New node should be red. No RB-tree fixup performed."""
+        self.stack = []
         if self.root is None:
             self.root = Node(key,value)
             self.stack.append(self.root)
