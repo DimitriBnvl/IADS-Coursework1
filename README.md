@@ -14,8 +14,6 @@ To get started, you’ll need the template files `perfhash.py` and `redblak.py` 
 
 1. It’s assumed that you are familiar with the basics of Python programming as covered by the three **lab sheets** available from the Semester 1 schedule page on OpenCourse. If you require help on the Python side of things, we will be offering **lab sessions** during Weeks 7 and 8 (i.e. 2–13 November), at times and venues to be advertised on the OpenCourse site and by email. You’re also welcome to post Python-related questions (or any other queries about the coursework) to the course’s **EdStem forum** — however, please check through previous postings first to see whether your question 
 
-1 
-
 has already been asked and answered! We’ll try where possible to answer queries within 48 hours. You are also encouraged to help one another (and us) by responding to queries if you know the answer (but see point 8 below). 
 
 2. The total volume of Python code you’re expected to write is not vast. My own implementation involves around 60 lines of code for Part A and 80 lines for Part B. Don’t worry if your version is a little longer or shorter than this — but if you find yourself writing twice as much, you should pause to ask yourself whether there’s a simpler approach. 
@@ -40,7 +38,6 @@ It’s good practice to get into the habit of following these recommendations, t
 
 -  You should add a modest number of **short comments** to your code where they help to make it more readable. However, this should be done quite sparingly, as over-commenting can be counterproductive. Put yourself in the shoes of a human marker with a tight time budget of 15 minutes per student submission: you’re wanting to steer their thoughts in the right direction as quickly as possible. Where possible, it’s best if the code is sufficiently clear that it speaks for itself. 
 
-2 
 
 For some excellent guidance on these sorts of things, which will be equally important in _all_ courses that involve programming, we recommend Perdita Stevens’s book _How to write good programs_ (Cambridge University Press), which includes examples in Java, Python and Haskell. 
 
@@ -60,9 +57,7 @@ Take a look at the template file `perfhash.py` . There is some simple machinery 
 
 > 1A common source of problems in Python coursework is incorrect indentation. E.g. a method that’s supposed to be part of a class definition may fail to be treated as such if the indentation indicates that the class definition has already finished. This may be something to double-check in case of problems. 
 
-> 2See for example G.E. Pibiri and R. Trani, _PTHash: Revisiting FCH Minimal Perfect Hashing_ , SIGIR 2021. 
-
-3 
+> 2See for example G.E. Pibiri and R. Trani, _PTHash: Revisiting FCH Minimal Perfect Hashing_ , SIGIR 2021.
 
 ### `miniHash(1000,0)(’aardvarks’) miniHash(1000,1)(’aardvarks’)` 
 
@@ -93,8 +88,7 @@ The provided class `Hasher` will use your code to create a perfect hash table. T
 Although the spirit of this scheme is to working with a _fixed_ set of key-value pairs, it’s also interesting to ask what it would take to allow for occasional changes to this set. This is investigated in Task 4, where you are invited to implement a simple insert method for your dictionary, and discuss its limitations. 
 
 > 3Actually, there’s no absolute guarantee that a suitable `j` will _ever_ be found. But as long as our mini-hash functions are ‘sufficiently random and independent’, this will happen ‘almost certainly’, and the approach works extremely well in practice. You need not worry about the possibility that the search will fail. 
-
-4 
+ 
 
 - **Task 1 (6 marks).** The first task is to write some simple code for constructing classic bucket-array hash tables. At the point marked `# TODO: Task 1` , provide implementations for the following two functions. 
 
@@ -119,8 +113,7 @@ It’s not too hard to check that your `H` really is a perfect hasher by using t
 > 4See e.g. `https://www.bananagrammer.com/2013/12/the-amazing-enable-word-list-project.html` 
 
 > 5For reasonable parameter choices, the space occupied by `H` will not exceed 3 or 4 bits per key (independently of the sizes of the keys)! This is obviously tiny compared with the keys themselves, let alone any values we might associate with them. 
-
-5 
+ 
 
 checking that this contains no buckets of length _>_ 1. This will entail writing a small amount of test code and we recommend that you try this, but please do not submit this extra code. 
 
@@ -146,7 +139,6 @@ You should devise a way to test the resulting `HashDict` implementation on a sui
 
 - **The final 4 marks** for Part A will be awarded by the human marker for code clarity and style (good structure, formatting, choice of names, commenting etc.) as described on page 2 of these instructions. 
 
-6 
 
 ## **Part B: Space-efficient red-black trees [50 marks]** 
 
@@ -184,7 +176,6 @@ that inserts a new key-value pair into the ordered tree at the correct position.
 
 You may follow the example of the `insert` method for plain binary trees from lectures. The case of inserting into an initially empty tree will need special treatment. 
 
-7 
 
 Once you have got the basic form of this method working, you should add suitable commands so that the path from the root to the new (or updated) node is recorded as a list in the `self.stack` field. Specifically, after calling the method, this field should contain the list of `Node` objects from the root to the new node, alternating with the special values `Left` and `Right` to indicate the branches chosen. (These are the possible values for the Python _enumeration type_ `Dir` , which is declared by the provided code.) For example, calling 
 
@@ -217,7 +208,6 @@ Now write a method `repeatRedUncle(self)` that uses `tryRedUncle` to apply the r
 
 The provided functions `toNextBlackLevel` and `balancedTree` are there to help you in the case where some local re-balancing is called for. In other implementations (and e.g. in CLRS), this is achieved by means of certain _rotation_ operations, but here I’ve 
 
-8 
 
 followed the more simple-minded approach of inspecting the relevant subtree down to the next ‘level of blacks’, retrieving the relevant 7 components A,a,B,b,C,c,D (in the notation of the lecture slides), and building a new and more ‘balanced’ subtree from these. Some inspection of the provided code may help you to understand what is going on. 
 
@@ -236,6 +226,4 @@ You should submit your work to **Gradescope** , using the Assessment _>_ Coursew
 You can re-submit as many times as you like up to the deadline — the last submission made before the deadline will be the one that is marked. **However,** if you do this, please ensure that you re-submit **both files** , not just the one that has changed! Only the files included in your most recent submission will be marked. 
 
 Good luck!!! — John 
-
-9 
 

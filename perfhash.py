@@ -37,6 +37,16 @@ def miniHash(m,j):
 def buildHashTable(L,r,h):
     """Arrange items of L into r buckets using hash fun h with range 0,..,r-1.
     Returns the list of buckets."""
+    # TODO: Map keys to {0,r-1} --> {key1: 0, key2: 1, key3: 2}
+    # TODO: Returns list of r buckets (hash code c appearing at position c (so c = 0 = index)
+    # TODO: Bucket = list of keys
+
+    buckets = [[]]
+    for key in L:
+        c = h(key)
+        buckets[c].append(key)
+
+    return buckets
 
 
 def buildModHashTable(L,p):
