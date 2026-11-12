@@ -181,24 +181,30 @@ class RedBlackTree():
         if len(self.stack) == 1:
             current.colour = Black
             return
+
         parent = self.stack[-3]
+        if current.colour is not Red or parent.colour is not Red:
+            return
         if len(self.stack) == 3:
             parent.colour = Black
             return
 
         grand  = self.stack[-5]
-        elems  = self.toNextBlackLevel(current)
+        elems  = self.toNextBlackLevel(grand)
         newTop = self.balancedTree(elems)
         if len(self.stack) == 5:
-            self.root = grand
+            self.root = newTop
         else:
             greatGrand    = self.stack[-7]
-            dirGreatGrant = self.stack[-6]
-            greatGrand.setChild(dirGreatGrant, newTop)
+            dirGreatGrand = self.stack[-6]
+            greatGrand.setChild(dirGreatGrand, newTop)
 
 
     def insert(self,key,value):
         """Insert new key-value pair in tree and perform RB-tree fixup."""
+        self.plainInsert(key,value)
+        self.repeatRedUncle()
+        self.endgame()
 
 # Provided code:
     
