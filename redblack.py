@@ -178,6 +178,17 @@ class RedBlackTree():
 
     def endgame(self):
         """Apply final RB-tree fixup after repeatRedUncle is applied."""
+        current = self.stack[-1]
+        if len(self.stack) == 1:
+            current.colour = Black
+            return
+        parent = self.stack[-3]
+        if len(self.stack) == 3:
+            parent.colour = Black
+            return
+
+        grand = self.stack[-5]
+
 
     def insert(self,key,value):
         """Insert new key-value pair in tree and perform RB-tree fixup."""
