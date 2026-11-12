@@ -74,6 +74,7 @@ class RedBlackTree():
 # TODO: Task 1.
 
     def lookup_(self, x, key):
+        """Search for key by comparing key values"""
         if x is None:      return None
         elif key == x.key: return x.value
         elif key < x.key:  return self.lookup_(x.getChild(Left), key)
@@ -87,6 +88,7 @@ class RedBlackTree():
 # TODO: Task 2.
 
     def plainInsert_(self, x, key, value):
+        """Insert new key-value pair in tree at position given by ordering,"""
         self.stack.append(x)
         if key == x.key:
             x.value = value

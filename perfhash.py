@@ -196,8 +196,18 @@ class HashDict:
             pairs = [kv for kv in T if kv is not None] + bucket
             self.__init__(self.cMHI, pairs, self.oload, self.load)
 
-# [Discussion goes here]
-# [Add further comment lines as necessary]
+# Discussion goes here:
+# The
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 
     
