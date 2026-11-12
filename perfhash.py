@@ -158,9 +158,17 @@ class HashDict:
 
     def lookup(self,k):
         """Return value associated with k, or None if k not present"""
+        for i in self.T:
+            if i[0] == k:
+                return i[1]
+        return None
 
     def setValue(self,k,v):
         """If k is present, update value to v. Return whether k present."""
+        present = k in self.T
+        if present:
+            self.T[k][1] = v
+        return present
 
 
 # TODO: Task 4: Towards an insert method
