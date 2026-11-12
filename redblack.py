@@ -9,6 +9,7 @@
 # Provided code:
 
 from enum import Enum
+from mailcap import lookup
 
 # Colour and direction tags
 
@@ -73,8 +74,15 @@ class RedBlackTree():
 
 # TODO: Task 1.
 
+    def lookup_(self, x, key):
+        if x is None:      return None
+        elif key == x.key: return x.value
+        elif key < x.key:  return self.lookup_(x.getChild(Left), key)
+        else:              return self.lookup_(x.getChild(Right), key)
+
     def lookup(self,key):
         """Search for key in whole tree, returning associated value or None"""
+        return self.lookup_(self.root, key)
 
 
 # TODO: Task 2.
