@@ -177,21 +177,24 @@ class HashDict:
 
     def insert(self,k,v):
         """Insert pair k,v into dictionary, where k is new."""
-        slot = self.H.hash(k)
-        entry = self.T[slot]
-        if entry is not None and entry[0] == k: return
+        H, T, slot = self.H, self.T, self.H.hash(k)
+        if T[slot] is None:
+            T[slot] = [k,v]
+        elif T[slot][0] != k:
+            i = modHash(k,H.r)
+            bucket = [kv for kv in T if kv and modHash(kv[0],H.r) == i]
 
-        if entry is None:
-            self.T[slot] = [k,v]
-            return
+            for kv in bucket: T[H.hash(kv[0])] = None
+            bucket.append([k,v])
+            for j in range(H.m//4):
+                slots = {miniHash(H.m,j)(kv[0]) for kv in bucket}
+                if len(slots)==len(bucket) and not any(T[s] for s in slots):
+                    H.hashChoices[i] = j
+                    for kv in bucket: T[H.hash(kv[0])] = kv
+                    return
 
-        else:
-            pairs = [entry for entry in self.T if not None]
-            pairs = pairs + [[k, v]]
-            keys = [kv[0] for kv in pairs]
-            self.H = Hasher(self.cMHI, keys, self.oload, self.load)
-            self.T = HashDict(self.cMHI, pairs, self.oload, self.load)
-
+            pairs = [kv for kv in T if kv is not None] + bucket
+            self.__init__(self.cMHI, pairs, self.oload, self.load)
 
 # [Discussion goes here]
 # [Add further comment lines as necessary]
