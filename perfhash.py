@@ -170,6 +170,7 @@ class HashDict:
         if entry is not None and entry[0] == k:
             entry[1] = v
             return True
+        return False
 
 
 # TODO: Task 4: Towards an insert method
