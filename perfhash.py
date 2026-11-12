@@ -65,17 +65,18 @@ def computeMiniHashIndices(L,m):
 
     for i, bucket in L:
         j = 0
-        slots = [miniHash(m, j)(w) for w in bucket]
+        while True:
+            h = miniHash(m,j)
+            slots = []
 
-        slots_left    = any(T[slot] for slot in slots)
-        has_duplicate = len(set(slots)) != len(slots)
-        while slots_left or has_duplicate:
+            for w in bucket:
+                slot = h(w)
+                if (T[slot] or slot in slots):
+                    break
+                slots.append(slot)
+            else:
+                break
             j += 1
-            slots = [miniHash(m, j)(w) for w in bucket]
-
-            slots_left    = any(T[slot] for slot in slots)
-            has_duplicate = len(set(slots)) != len(slots)
-
         R[i] = j
         for slot in slots:
             T[slot] = True
