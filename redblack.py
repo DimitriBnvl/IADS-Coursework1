@@ -121,6 +121,19 @@ class RedBlackTree():
     def tryRedUncle(self):
         """Apply red uncle rule if possible at tree position given by current
         stack state. Return whether the rule was applicable."""
+        if len(self.stack) < 4: return False
+
+        current, parent, grandparent = self.stack[-1], self.stack[-3], self.stack[-5]
+        uncle = grandparent.getChild(opposite(self.stack[-4]))
+
+        if any([colourOf(uncle)==Black, colourOf(parent) == Black, colourOf(current) == Black]):
+            return False
+
+        parent.colour      = Black
+        uncle.colour       = Black
+        grandparent.colour = Red
+        self.stack = self.stack[:-4]
+        return True
         
     def repeatRedUncle(self):
         """Apply red uncle rule as often as possible starting from current
