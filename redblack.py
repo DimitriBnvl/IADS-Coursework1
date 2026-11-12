@@ -133,12 +133,14 @@ class RedBlackTree():
         parent.colour      = Black
         uncle.colour       = Black
         grandparent.colour = Red
-        [self.stack.pop(-1) for _ in range(4)]
+        [self.stack.pop() for _ in range(4)]
         return True
         
     def repeatRedUncle(self):
         """Apply red uncle rule as often as possible starting from current
         tree position"""
+        while self.tryRedUncle():
+            pass
 
 
 # Provided code to support Task 4:
