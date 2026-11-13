@@ -196,20 +196,18 @@ class HashDict:
             pairs = [kv for kv in T if kv is not None] + bucket
             self.__init__(self.cMHI, pairs, self.oload, self.load)
 
-# Discussion goes here:
-# The
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
+# When designing algorithms, speed and memory can often be thought of as
+# two currencies used to 'buy' more of the other. A faster HashDict would cost
+# significantly more memory. For example, when repairing a bucket, insert
+# scans the whole table instead of storing which keys belong to each outer
+# bucket. The extra memory used to indicate which keys correspond to which
+# bucket could be used to speed up the handling of each collision. The
+# HashDict could also be made more efficient by increasing the number of slots
+# in the final hash table. This makes rebuilds rarer, saving the cost of
+# rebuilding the whole HashDict while making new insertions. This can be done
+# by rebuilding with more slots than n/load. Neither removes the worst case:
+# one insert can still trigger a full rebuild of the HashDict. Although both
+# reduce the average runtime, they work against the compactness of the scheme.
     
 # For testing: Loading in a word list
 
